@@ -1,0 +1,21 @@
+version: "3"
+services:
+  app-db:
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=myDB
+  app:
+    build: .  #build image off of my current directory docker file
+    ports:
+      - "8080:8080"
+    depends_on:
+      - app-db
+#docker run --rm  --name mysql-container1 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=myDB -p 3306:3306 mysql:latest
+  #docker exec mysql-container1 -uroot -ppassword
+  #or
+  #docker exec -it mysql-container2 bash
+  #bash> mysql -uroot -ppassword
+#docker run &#45;&#45;name app-db -d -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=myDB mysql
